@@ -33,6 +33,9 @@
 #define ERROR 0
 #define SUCCESS 1
 
+#define true 1
+#define false 0
+
 #define MAX_VARCHAR 50
 #define MAX_ATTR 30
 #define MAX_NAME 50
