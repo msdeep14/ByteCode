@@ -1,5 +1,6 @@
 #include "declaration.h"
 #include "file_handler.h"
+#include "add.h"
 
 int convert_to_integer(char input[]){
 	int ans = 0;
@@ -17,7 +18,9 @@ int convert_to_integer(char input[]){
 
 int main(int argc, char *argv[]){
 	printf("\n\t\tHello world!!!\n\n");
-	int flag=1;
+	int flag=1,ret=0;
+	char *file_name;
+	file_name=(char*)malloc(sizeof(char)*MAX_NAME);
 	//check for the no. of arguments
 	// for creating new file -> ./a.out -c myfile.txt
 	if(argc == 3){
@@ -26,7 +29,7 @@ int main(int argc, char *argv[]){
 			char *per = (char*)malloc(sizeof(char) * MAX_NAME);
 			strcat(per,"w+");
 			FILE *fp = open_file(argv[2],per);
-
+			strcpy(file_name,argv[2]);
 			fclose(fp);
 		}
 		else{
@@ -39,6 +42,7 @@ int main(int argc, char *argv[]){
 		char *per = (char*)malloc(sizeof(char) * MAX_NAME);
 		strcat(per,"a+");
 		FILE *fp = open_file(argv[1],per);
+		strcpy(file_name,argv[1]);
 		if(fp == NULL){
 			printf("\n%s don't exist\n\n",argv[1]);
 			exit(0);
@@ -64,6 +68,10 @@ int main(int argc, char *argv[]){
 		switch(inp){
 			case 1 :
 				//add
+				ret = add(file_name);
+				if(ret == 0){
+					printf("\nwrite operation failed!!!\n");
+				}
 				break;
 			case 2 :
 				// save and exit

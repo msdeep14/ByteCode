@@ -39,10 +39,9 @@
 #define MAX_VARCHAR 50
 #define MAX_ATTR 30
 #define MAX_NAME 50
-#define MULTIPLICITY 10
 #define MAX_PATH 1000
+#define MAX_STRING 1000
 
-#define MAX_NODE 30
 
 using namespace std;
 
