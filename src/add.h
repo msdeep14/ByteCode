@@ -13,12 +13,15 @@ int add(char file_name[]){
     char ch;
 
     while((ch = std::cin.get()) != 27){
-        fgets(add_input,MAX_STRING,stdin);
-        //printf("%s\n",add_input);
         FILE *fp = open_file(file_name,per);
         if(fp == NULL){
             return 0;
         }
+        fprintf(fp, "%c", ch);
+        fgets(add_input,MAX_STRING,stdin);
+        //add_input =  ch + add_input;
+        //printf("%s\n",add_input);
+
         //fwrite(add_input,1,sizeof(add_input),fp);
         fputs(add_input,fp);
         //fgets(add_input,MAX_STRING,stdin);
