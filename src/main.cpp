@@ -26,8 +26,15 @@ int main(int argc, char *argv[]){
 	if(argc == 3){
 		if(strcmp(argv[1],"-c") == 0){
 			//create new file
+			//check if entered file name already exists
 			char *per = (char*)malloc(sizeof(char) * MAX_NAME);
 			strcat(per,"w+");
+			ret = check_file_existence(argv[2],per);
+			if(ret == 1){
+				printf("\n%s already exists!!!\n",argv[2]);
+				printf("for opening existing file enter : ./a.out myfile.txt\n\n");
+				exit(0);
+			}
 			FILE *fp = open_file(argv[2],per);
 			strcpy(file_name,argv[2]);
 			fclose(fp);
