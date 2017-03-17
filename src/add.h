@@ -11,19 +11,25 @@ int add(char file_name[]){
     //enter contents till the escape sequence is entered. ascii == 27;
     //fgets(add_input,MAX_STRING,stdin);
     char ch;
-
+    int x=1;
     while((ch = std::cin.get()) != 27){
         FILE *fp = open_file(file_name,per);
         if(fp == NULL){
             return 0;
         }
-        fprintf(fp, "%c", ch);
+        if(x!=1){
+            fprintf(fp, "%c", ch);
+        }
+        x++;
         fgets(add_input,MAX_STRING,stdin);
         //add_input =  ch + add_input;
         //printf("%s\n",add_input);
 
         //fwrite(add_input,1,sizeof(add_input),fp);
-        fputs(add_input,fp);
+        //fputs(add_input,fp);
+        fprintf(fp,"%s",add_input);
+        fflush(stdout);
+        fflush(stdin);
         //fgets(add_input,MAX_STRING,stdin);
         fclose(fp);
     }
