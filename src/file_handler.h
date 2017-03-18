@@ -41,6 +41,6 @@ int check_file_existence(char file_name[],char perm[]){
     else return 0;
     */
     struct stat   buffer;
-    printf("stat : %d\n",stat (file_name, &buffer));
+    //printf("stat : %d\n",stat (file_name, &buffer));
     return (stat (file_name, &buffer) == 0);
 }
