@@ -12,39 +12,53 @@ int add(char file_name[]){
     //scaf("%s",add_input);
 
     //enter contents till the escape sequence is entered. ascii == 27;
-    //fgets(add_input,MAX_STRING,stdin);
+    fgets(add_input,MAX_STRING,stdin);
     char ch;
     int x=1;
 
     while((ch = std::cin.get()) != 27){
         //printf("\ninside while\n");
-        FILE *fp = open_file(file_name,per);
-        if(fp == NULL){
+        //FILE *fp = open_file(file_name,per);
+        //if(fp == NULL){
             //printf("\nfp is null\n");
-            return 0;
-        }
-        if(x!=1){
-            string s_conv;
-            s_conv.push_back(ch);
-            lis.push_front(s_conv);
-            fprintf(fp, "%c", ch);
-        }
+        //    return 0;
+        //}
+        string total;
+        //if(x!=1){
+            //string s_conv;
+            total.push_back(ch);
+            //s_conv.push_back(ch);
+            //lis.push_front(s_conv);
+            //fprintf(fp, "%c", ch);
+        //}
         x++;
         fgets(add_input,MAX_STRING,stdin);
 
+        //str_temp because str takes "\n" as the last element of string which creates a empty push in the list;
         std::string str(add_input);
         string str_temp(str.begin(),str.end()-1);
-        lis.push_front(str_temp);
+        total +=str_temp;
+        lis.push_front(total);
 
-        fprintf(fp,"%s",add_input);
+        //fprintf(fp,"%s",add_input);
         fflush(stdout);
         fflush(stdin);
         //fgets(add_input,MAX_STRING,stdin);
-        fclose(fp);
+        //fclose(fp);
     }
+    FILE *fp = open_file(file_name,per);
     printf("\nvalues\n");
-    for (list<string>::iterator i = lis.begin(); i != lis.end(); ++i)
-    cout << *i << endl;
+    for (list<string>::reverse_iterator i = lis.rbegin(); i != lis.rend(); ++i){
+        cout << *i << endl;
+        std::string str = *i;
+        const char *cstr = str.c_str();
+        fprintf(fp,"%s",cstr);
+        str.clear();
+        str = "\n";
+        cstr = str.c_str();
+        fprintf(fp,"%s",cstr);
+    }
+
 
 
     /*
