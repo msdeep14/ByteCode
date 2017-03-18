@@ -2,8 +2,8 @@
 
 int add(char file_name[]){
     //store input in stack first and finally write to file and the time of termination;
-    //std::stack<string> stack_inp;
-
+    //stack<string> stack_inp;
+    list <string> lis;
     char *add_input;
     char *per = (char*)malloc(sizeof(char) * MAX_NAME);
     strcat(per,"a+");
@@ -15,43 +15,37 @@ int add(char file_name[]){
     //fgets(add_input,MAX_STRING,stdin);
     char ch;
     int x=1;
-    //stringstream ss;
-    //string s_conv;
-    //char c = 'a';
-
 
     while((ch = std::cin.get()) != 27){
+        //printf("\ninside while\n");
         FILE *fp = open_file(file_name,per);
         if(fp == NULL){
+            //printf("\nfp is null\n");
             return 0;
         }
         if(x!=1){
-            //ss << ch;
-            //ss >> s_conv;
-            //stack_inp.push(s_conv);
+            string s_conv;
+            s_conv.push_back(ch);
+            lis.push_front(s_conv);
             fprintf(fp, "%c", ch);
         }
         x++;
         fgets(add_input,MAX_STRING,stdin);
-        //add_input =  ch + add_input;
-        //printf("%s\n",add_input);
 
-        //fwrite(add_input,1,sizeof(add_input),fp);
-        //fputs(add_input,fp);
-        //std::string str(add_input);
-        //stack_inp.push(str);
+        std::string str(add_input);
+        string str_temp(str.begin(),str.end()-1);
+        lis.push_front(str_temp);
+
         fprintf(fp,"%s",add_input);
         fflush(stdout);
         fflush(stdin);
         //fgets(add_input,MAX_STRING,stdin);
         fclose(fp);
     }
-    /*
-    while (!stack_inp.empty()) {
-        std::cout<<stack_inp.top();
-        cout<<endl;
-        stack_inp.pop();
-    }*/
+    printf("\nvalues\n");
+    for (list<string>::iterator i = lis.begin(); i != lis.end(); ++i)
+    cout << *i << endl;
+
 
     /*
     fgets(add_input,MAX_STRING,stdin);

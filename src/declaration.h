@@ -20,6 +20,7 @@
 #include <string>
 #include <fstream>
 #include <stack>
+#include <list>
 #include <sstream>
 
 #define ERROR 0
