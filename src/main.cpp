@@ -8,10 +8,12 @@ int convert_to_integer(char input[]){
 	vec.push_back("i");
 	vec.push_back("q");
 	vec.push_back("wq");
+	vec.push_back("u");
 	string s = input;
 	if(s==vec[0]) ans=1;
 	else if(s==vec[1]) ans=2;
 	else if(s==vec[2]) ans=3;
+	else if(s == vec[3]) ans = 4;
 	else ans = 0;
 	return ans;
 }
@@ -19,6 +21,7 @@ int convert_to_integer(char input[]){
 int main(int argc, char *argv[]){
 	printf("\n\t\tHello world!!!\n\n");
 	int flag=1,ret=0;
+	list<string> ret_list;
 	char *file_name;
 	file_name=(char*)malloc(sizeof(char)*MAX_NAME);
 	//check for the no. of arguments
@@ -75,18 +78,23 @@ int main(int argc, char *argv[]){
 		switch(inp){
 			case 1 :
 				//add
-				ret = add(file_name);
-				if(ret == 0){
+				ret_list = add(file_name);//
+				if(ret_list.size() == 0){
 					printf("\nwrite operation failed!!!\n");
 				}
 				break;
 			case 2 :
 				// save and exit
+				//do all the operations on returned list and finally write list to file on termination;
+				//write_list_to_file(file_name,per,lis);
 				flag=0;
 				break;
 			case 3:
 				//exit;
 				flag=0;
+				break;
+			case 4:
+				//undo
 				break;
 			default:
 				//printf("inp : %d\n",inp);

@@ -1,6 +1,6 @@
 #include "declaration.h"
 
-int add(char file_name[]){
+list<string> add(char file_name[]){
     //store input in stack first and finally write to file and the time of termination;
     //stack<string> stack_inp;
     list <string> lis;
@@ -14,7 +14,7 @@ int add(char file_name[]){
     //enter contents till the escape sequence is entered. ascii == 27;
     fgets(add_input,MAX_STRING,stdin);
     char ch;
-    int x=1;
+    //int x=1;
 
     while((ch = std::cin.get()) != 27){
         //printf("\ninside while\n");
@@ -31,7 +31,7 @@ int add(char file_name[]){
             //lis.push_front(s_conv);
             //fprintf(fp, "%c", ch);
         //}
-        x++;
+        //x++;
         fgets(add_input,MAX_STRING,stdin);
 
         //str_temp because str takes "\n" as the last element of string which creates a empty push in the list;
@@ -43,8 +43,6 @@ int add(char file_name[]){
         //fprintf(fp,"%s",add_input);
         fflush(stdout);
         fflush(stdin);
-        //fgets(add_input,MAX_STRING,stdin);
-        //fclose(fp);
     }
     FILE *fp = open_file(file_name,per);
     printf("\nvalues\n");
@@ -58,20 +56,5 @@ int add(char file_name[]){
         cstr = str.c_str();
         fprintf(fp,"%s",cstr);
     }
-
-
-
-    /*
-    fgets(add_input,MAX_STRING,stdin);
-    fgets(add_input,MAX_STRING,stdin);
-    //printf("%s\n",add_input);
-    FILE *fp = open_file(file_name,per);
-    if(fp == NULL){
-        return 0;
-    }
-    //fwrite(add_input,1,sizeof(add_input),fp);
-    fputs(add_input,fp);
-    fclose(fp);
-    */
-    return 1;
+    return lis;
 }
