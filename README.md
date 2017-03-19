@@ -1,4 +1,4 @@
-# ByteCandy
+# ByteCode
 
 #### A text editor in c.
 
