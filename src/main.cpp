@@ -6,8 +6,8 @@ int convert_to_integer(char input[]){
 	int ans = 0;
 	vector<string> vec;
 	vec.push_back("i");
-	vec.push_back("q");
 	vec.push_back("wq");
+	vec.push_back("q");
 	vec.push_back("u");
 	string s = input;
 	if(s==vec[0]) ans=1;
@@ -20,8 +20,10 @@ int convert_to_integer(char input[]){
 
 int main(int argc, char *argv[]){
 	printf("\n\t\tHello world!!!\n\n");
+	char ch_check = 'y';
 	int flag=1,ret=0;
 	list<string> ret_list;
+	FILE *fp;
 	char *file_name;
 	file_name=(char*)malloc(sizeof(char)*MAX_NAME);
 	//check for the no. of arguments
@@ -38,9 +40,9 @@ int main(int argc, char *argv[]){
 				printf("for opening existing file enter : ./a.out myfile.txt\n\n");
 				exit(0);
 			}
-			FILE *fp = open_file(argv[2],per);
+			fp = open_file(argv[2],per);
 			strcpy(file_name,argv[2]);
-			fclose(fp);
+			//fclose(fp);
 		}
 		else{
 			printf("\nwrong input, usage : ./a.out -c myfile.txt\n\n");
@@ -51,15 +53,14 @@ int main(int argc, char *argv[]){
 	else if(argc == 2){
 		char *per = (char*)malloc(sizeof(char) * MAX_NAME);
 		strcat(per,"a+");
-		FILE *fp = open_file(argv[1],per);
+		fp = open_file(argv[1],per);
 		strcpy(file_name,argv[1]);
 		if(fp == NULL){
 			printf("\n%s don't exist\n\n",argv[1]);
 			exit(0);
 		}
-		fclose(fp);
-	}
-	else{
+		//fclose(fp);
+	}else{
 		printf("\nwrong input, usage : ./a.out -c myfile.txt\n OR SEE INSTRUCIONS\n");
 		exit(0);
 	}
@@ -82,19 +83,59 @@ int main(int argc, char *argv[]){
 				if(ret_list.size() == 0){
 					printf("\nwrite operation failed!!!\n");
 				}
+				for (list<string>::reverse_iterator i = ret_list.rbegin(); i != ret_list.rend(); ++i){
+			        cout << *i << endl;
+			    }
 				break;
 			case 2 :
 				// save and exit
 				//do all the operations on returned list and finally write list to file on termination;
 				//write_list_to_file(file_name,per,lis);
+				for (list<string>::reverse_iterator i = ret_list.rbegin(); i != ret_list.rend(); ++i){
+			        std::string str = *i;
+			        const char *cstr = str.c_str();
+			        fprintf(fp,"%s",cstr);
+			        str.clear();
+			        str = "\n";
+			        cstr = str.c_str();
+			        fprintf(fp,"%s",cstr);
+			    }
+				printf("contents saved to file\nexiting...\n\n");
 				flag=0;
 				break;
 			case 3:
-				//exit;
+				//don't save any contents and exit;
+				printf("\nAre you sure you want to exit without saving (y/n)?\n");
+				scanf("%c",&ch_check);
+				if(ch_check == 'Y' || ch_check =='y'){
+					flag = 0;
+				}else if(ch_check == 'n' || ch_check == 'N'){
+					printf("\nsaving the contents of file!\n");
+					for (list<string>::reverse_iterator i = ret_list.rbegin(); i != ret_list.rend(); ++i){
+				        std::string str = *i;
+				        const char *cstr = str.c_str();
+				        fprintf(fp,"%s",cstr);
+				        str.clear();
+				        str = "\n";
+				        cstr = str.c_str();
+				        fprintf(fp,"%s",cstr);
+				    }
+				}else{
+					printf("\ncare for your data\nenter correct choice next time\nexiting...\n\n");
+				}
 				flag=0;
 				break;
 			case 4:
 				//undo
+				if(ret_list.size() > 0){
+					ret_list.pop_front();
+					system("clear");
+					for (list<string>::reverse_iterator i = ret_list.rbegin(); i != ret_list.rend(); ++i){
+				        cout << *i << endl;
+				    }
+				}else{
+					printf("\nnothing to undo!\n");
+				}
 				break;
 			default:
 				//printf("inp : %d\n",inp);
@@ -108,6 +149,5 @@ int main(int argc, char *argv[]){
 		}
 	}
 	printf("\n\n");
-
 	return 0;
 }

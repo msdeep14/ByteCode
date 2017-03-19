@@ -44,10 +44,11 @@ list<string> add(char file_name[]){
         fflush(stdout);
         fflush(stdin);
     }
+    /*
     FILE *fp = open_file(file_name,per);
     printf("\nvalues\n");
     for (list<string>::reverse_iterator i = lis.rbegin(); i != lis.rend(); ++i){
-        cout << *i << endl;
+        //cout << *i << endl;
         std::string str = *i;
         const char *cstr = str.c_str();
         fprintf(fp,"%s",cstr);
@@ -56,5 +57,6 @@ list<string> add(char file_name[]){
         cstr = str.c_str();
         fprintf(fp,"%s",cstr);
     }
+    */
     return lis;
 }
