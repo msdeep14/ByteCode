@@ -14,7 +14,7 @@
 
 ### Editor options
 
-1. i: insert contents
+1. i: insert contents, to exit from writing , press esc key then enter.
 2. wq: save and exit
 3. q: exit without saving
 4. u: undo
