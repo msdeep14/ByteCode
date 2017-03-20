@@ -1,3 +1,10 @@
+/*
+** COPYRIGHT mandeep singh 2017 under
+                    GNU GENERAL PUBLIC LICENSE
+                     Version 3, 29 June 2007
+
+*/
+
 #include "declaration.h"
 
 list<string> add(char file_name[]){

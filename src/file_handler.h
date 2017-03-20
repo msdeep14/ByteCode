@@ -1,3 +1,11 @@
+/*
+** COPYRIGHT mandeep singh 2017 under
+                    GNU GENERAL PUBLIC LICENSE
+                     Version 3, 29 June 2007
+
+*/
+
+
 #include "declaration.h"
 
 FILE * open_file(char file_name[] , char perm[]){
