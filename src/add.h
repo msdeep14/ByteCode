@@ -47,6 +47,16 @@ list<string> add(char file_name[]){
         total +=str_temp;
         lis.push_front(total);
 
+        /*
+        * list element contains complete line as its element
+        * break this list through spaces and store it in another list so that it can be useful for undo
+        * return both list
+        * for undo process undo_list and while processing also update ret_list
+
+        * think of more efficient way.
+
+        */
+
         //fprintf(fp,"%s",add_input);
         fflush(stdout);
         fflush(stdin);

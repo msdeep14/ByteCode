@@ -51,8 +51,23 @@ int main(int argc, char *argv[]){
 			fp = open_file(argv[2],per);
 			strcpy(file_name,argv[2]);
 			//fclose(fp);
-		}
-		else{
+		}else if(strcmp(argv[1],"-r") == 0){
+			//open file in read mode;
+			char *per = (char*)malloc(sizeof(char)*MAX_NAME);
+			strcat(per,"r");
+			int c;
+			fp = open_file(argv[2],per);
+			if(fp != NULL){
+				//diplay file on  terminal;
+				while ((c = getc(fp)) != EOF){
+					putchar(c);
+				}
+				return 0;
+			}else{
+				printf("\nfile don't exist!\n\t\texiting...\n\n");
+				return 0;
+			}
+		}else{
 			printf("\nwrong input, usage : ./a.out -c myfile.txt\n\n");
 			exit(0);
 		}
