@@ -16,29 +16,13 @@ list<string> add(char file_name[]){
     strcat(per,"a+");
     printf("enter contents of file\n");
     add_input = (char*)malloc(sizeof(char)*MAX_STRING+2);
-    //scaf("%s",add_input);
-
     //enter contents till the escape sequence is entered. ascii == 27;
     fgets(add_input,MAX_STRING,stdin);
     char ch;
-    //int x=1;
 
     while((ch = std::cin.get()) != 27){
-        //printf("\ninside while\n");
-        //FILE *fp = open_file(file_name,per);
-        //if(fp == NULL){
-            //printf("\nfp is null\n");
-        //    return 0;
-        //}
         string total;
-        //if(x!=1){
-            //string s_conv;
-            total.push_back(ch);
-            //s_conv.push_back(ch);
-            //lis.push_front(s_conv);
-            //fprintf(fp, "%c", ch);
-        //}
-        //x++;
+        total.push_back(ch);
         fgets(add_input,MAX_STRING,stdin);
 
         //str_temp because str takes "\n" as the last element of string which creates a empty push in the list;
@@ -57,11 +41,11 @@ list<string> add(char file_name[]){
 
         */
 
-        //fprintf(fp,"%s",add_input);
         fflush(stdout);
         fflush(stdin);
     }
     /*
+    //write list into file
     FILE *fp = open_file(file_name,per);
     printf("\nvalues\n");
     for (list<string>::reverse_iterator i = lis.rbegin(); i != lis.rend(); ++i){
