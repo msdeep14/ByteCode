@@ -10,18 +10,14 @@
 #include "file_handler.h"
 #include "add.h"
 
-int convert_to_integer(char input[]){
+int convert_to_integer(std::vector<string> store_input_vec, char input[]){
 	int ans = 0;
-	vector<string> vec;
-	vec.push_back("i");
-	vec.push_back("wq");
-	vec.push_back("q");
-	vec.push_back("u");
 	string s = input;
-	if(s==vec[0]) ans=1;
-	else if(s==vec[1]) ans=2;
-	else if(s==vec[2]) ans=3;
-	else if(s == vec[3]) ans = 4;
+	if(s==store_input_vec[0]) ans=1;
+	else if(s==store_input_vec[1]) ans=2;
+	else if(s==store_input_vec[2]) ans=3;
+	else if(s == store_input_vec[3]) ans = 4;
+	else if(s == store_input_vec[4]) ans = 5;
 	else ans = 0;
 	return ans;
 }
@@ -30,9 +26,17 @@ int main(int argc, char *argv[]){
 	printf("\n\t\tHello world!!!\n\n");
 	char ch_check = 'y';
 	int flag=1,ret=0;
+	string current_copy_line; //string has a copy of current line data;
 	vector <list <string> > list_store;
 	FILE *fp;
 	char *file_name;
+	//store input commands in string vector
+	vector<string> store_input_vec;
+	store_input_vec.push_back("i");
+	store_input_vec.push_back("wq");
+	store_input_vec.push_back("q");
+	store_input_vec.push_back("u");
+	store_input_vec.push_back("yy");
 	file_name=(char*)malloc(sizeof(char)*MAX_NAME);
 	//check for the no. of arguments
 	// for creating new file -> ./a.out -c myfile.txt
@@ -90,13 +94,15 @@ int main(int argc, char *argv[]){
 	//file opened, write data to stream and finally to file on save.
 	// i -> insert
 	// q -> quit
-	// s -> save and quit
-	//
+	// wq -> save and quit
+	// u -> undo
+	// yy -> copyies current line
+
 	char *input = (char*)malloc(sizeof(char)*MAX_NAME);
 	printf("\n:");
 	scanf("%s",input);
 	//convert input string to integer sequences
-	int inp = convert_to_integer(input);
+	int inp = convert_to_integer(store_input_vec,input);
 	while(flag==1){
 		switch(inp){
 			case 1 :
@@ -181,9 +187,17 @@ int main(int argc, char *argv[]){
 					for (list<string>::reverse_iterator i = list_store[1].rbegin(); i != list_store[1].rend(); ++i){
 				        cout << *i << endl;
 				    }*/
+					for(list<string> :: reverse_iterator i= list_store[0].rbegin();i!=list_store[0].rend();++i){
+						cout<< *i <<endl;
+					}
 				}else{
 					printf("\nnothing to undo!\n");
 				}
+				break;
+			case 5:
+				//option yy -> copies current line;
+				current_copy_line = list_store[0].front();
+				cout<<"\""<<current_copy_line<<"\" copied\n\n";
 				break;
 			default:
 				//printf("inp : %d\n",inp);
@@ -193,7 +207,7 @@ int main(int argc, char *argv[]){
 		if(flag!=0){
 			printf("\n\n:");
 			scanf("%s",input);
-			inp=convert_to_integer(input);
+			inp=convert_to_integer(store_input_vec,input);
 		}
 	}
 	printf("\n\n");
