@@ -18,3 +18,5 @@
 2. wq: save and exit
 3. q: exit without saving
 4. u: undo
+5. yc: copy current line
+6. yp: paste the copied line at the current curson position
