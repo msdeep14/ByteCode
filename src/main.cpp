@@ -69,13 +69,9 @@ int main(int argc, char *argv[]){
 			//open file in read mode;
 			char *per = (char*)malloc(sizeof(char)*MAX_NAME);
 			strcat(per,"r");
-			int c;
 			fp = open_file(argv[2],per);
 			if(fp != NULL){
-				//diplay file on  terminal;
-				while ((c = getc(fp)) != EOF){
-					putchar(c);
-				}
+				print_file_contents(fp,per);
 				return 0;
 			}else{
 				printf("\nfile don't exist!\n\t\texiting...\n\n");
@@ -92,6 +88,8 @@ int main(int argc, char *argv[]){
 		strcat(per,"a+");
 		fp = open_file(argv[1],per);
 		strcpy(file_name,argv[1]);
+		//print contents of file on terminal
+		print_file_contents(fp,per);
 		if(fp == NULL){
 			printf("\n%s don't exist\n\n",argv[1]);
 			exit(0);

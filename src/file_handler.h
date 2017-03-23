@@ -8,6 +8,13 @@
 
 #include "declaration.h"
 
+void print_file_contents(FILE *fp,char per[]){
+    int c;
+    while ((c = getc(fp)) != EOF){
+        putchar(c);
+    }
+}
+
 FILE * open_file(char file_name[] , char perm[]){
     FILE *fp;
     struct stat st = {0};
