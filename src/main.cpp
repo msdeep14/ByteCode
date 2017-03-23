@@ -24,7 +24,9 @@ int convert_to_integer(std::vector<string> store_input_vec, char input[]){
 
 int main(int argc, char *argv[]){
 	printf("\n\t\tHello world!!!\n\n");
-	char ch_check = 'y';
+	int data_input_flag = 0; //set to 1 , once you enter the contents of file using :i
+	char *ch_check; //flag for checking whether to exit without saving the file;
+	ch_check = (char*)malloc(sizeof(char)*1);
 	int flag=1,ret=0;
 	string current_copy_line; //string has a copy of current line data;
 	vector <list <string> > list_store;
@@ -110,6 +112,8 @@ int main(int argc, char *argv[]){
 				list_store = add(file_name);//
 				if(list_store[1].size() == 0){
 					printf("\nwrite operation failed!!!\n");
+				}else{
+					data_input_flag=1;
 				}
 				/*
 				for (list<string>::reverse_iterator i = list_store[1].rbegin(); i != list_store[1].rend(); ++i){
@@ -135,20 +139,25 @@ int main(int argc, char *argv[]){
 			case 3:
 				//don't save any contents and exit;
 				printf("\nAre you sure you want to exit without saving (y/n)?\n");
-				scanf("%c",&ch_check);
-				if(ch_check == 'Y' || ch_check =='y'){
+				//space before %c -> to wait for input, because by default it is taking new line;
+				scanf(" %c",ch_check);
+				if(*ch_check == 'Y' || *ch_check =='y'){
 					flag = 0;
-				}else if(ch_check == 'n' || ch_check == 'N'){
+				}else if(*ch_check == 'n' || *ch_check == 'N'){
 					printf("\nsaving the contents of file!\n");
-					for (list<string>::reverse_iterator i = list_store[0].rbegin(); i != list_store[0].rend(); ++i){
-				        std::string str = *i;
-				        const char *cstr = str.c_str();
-				        fprintf(fp,"%s",cstr);
-				        str.clear();
-				        str = "\n";
-				        cstr = str.c_str();
-				        fprintf(fp,"%s",cstr);
-				    }
+					if(data_input_flag == 1){
+						for (list<string>::reverse_iterator i = list_store[0].rbegin(); i != list_store[0].rend(); ++i){
+					        std::string str = *i;
+					        const char *cstr = str.c_str();
+					        fprintf(fp,"%s",cstr);
+					        str.clear();
+					        str = "\n";
+					        cstr = str.c_str();
+					        fprintf(fp,"%s",cstr);
+					    }
+					}else{
+						printf("\n\t\t empty file saved!!!\n\n");
+					}
 				}else{
 					printf("\ncare for your data\nenter correct choice next time\nexiting...\n\n");
 					delete_file(file_name);
