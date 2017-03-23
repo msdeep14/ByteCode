@@ -26,6 +26,17 @@ FILE * open_file(char file_name[] , char perm[]){
     return fp;
 }
 
+void delete_file(char file_name[]){
+    FILE *fp;
+    struct stat st = {0};
+    char *name = (char *)malloc(sizeof(char) * (2 * MAX_NAME + 15));
+    strcpy(name,"rm -rf ");
+    strcat(name, "./FILES/");
+    strcat(name, file_name);
+    system(name);
+    free(name);
+}
+
 int check_file_existence(char file_name[],char perm[]){
     /*
     FILE *fp;

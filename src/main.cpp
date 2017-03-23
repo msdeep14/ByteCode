@@ -151,6 +151,7 @@ int main(int argc, char *argv[]){
 				    }
 				}else{
 					printf("\ncare for your data\nenter correct choice next time\nexiting...\n\n");
+					delete_file(file_name);
 				}
 				flag=0;
 				break;
