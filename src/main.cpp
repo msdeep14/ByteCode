@@ -18,12 +18,20 @@ int convert_to_integer(std::vector<string> store_input_vec, char input[]){
 	else if(s==store_input_vec[2]) ans=3;
 	else if(s == store_input_vec[3]) ans = 4;
 	else if(s == store_input_vec[4]) ans = 5;
+	else if(s == store_input_vec[5]) ans = 6;
 	else ans = 0;
 	return ans;
 }
 
+void print_message(){
+	printf("\n\t\t\t\t\t\t\tByteCode\n");
+	printf("\t\t\t\t\t\t\t=========\n\n");
+	printf("\n\t\t\t\t\t\t developed by : msdeep14\n\n");
+}
+
 int main(int argc, char *argv[]){
-	printf("\n\t\tHello world!!!\n\n");
+	system("clear");
+	print_message();
 	int data_input_flag = 0; //set to 1 , once you enter the contents of file using :i
 	char *ch_check; //flag for checking whether to exit without saving the file;
 	ch_check = (char*)malloc(sizeof(char)*1);
@@ -38,7 +46,8 @@ int main(int argc, char *argv[]){
 	store_input_vec.push_back("wq");
 	store_input_vec.push_back("q");
 	store_input_vec.push_back("u");
-	store_input_vec.push_back("yy");
+	store_input_vec.push_back("yc");
+	store_input_vec.push_back("yp");
 	file_name=(char*)malloc(sizeof(char)*MAX_NAME);
 	//check for the no. of arguments
 	// for creating new file -> ./a.out -c myfile.txt
@@ -98,7 +107,8 @@ int main(int argc, char *argv[]){
 	// q -> quit
 	// wq -> save and quit
 	// u -> undo
-	// yy -> copyies current line
+	// yc -> copies current line
+	// yp -> paste copied line
 
 	char *input = (char*)malloc(sizeof(char)*MAX_NAME);
 	printf("\n:");
@@ -193,6 +203,7 @@ int main(int argc, char *argv[]){
 						}
 					}
 					system("clear");
+					print_message();
 					/*
 					for (list<string>::reverse_iterator i = list_store[1].rbegin(); i != list_store[1].rend(); ++i){
 				        cout << *i << endl;
@@ -205,9 +216,21 @@ int main(int argc, char *argv[]){
 				}
 				break;
 			case 5:
-				//option yy -> copies current line;
+				//option yp -> copies current line;
 				current_copy_line = list_store[0].front();
 				cout<<"\""<<current_copy_line<<"\" copied\n\n";
+				break;
+			case 6:
+				//option yp -> paste the copied line
+				list_store[0].push_front(current_copy_line);
+				//also store this in undo_list word by word;
+				list_store[1] =  insert_by_token_into_list(list_store[1],current_copy_line);
+				system("clear");
+				print_message();
+				printf("\npaste operation successfull!!!\n\n");
+				for(list<string> :: reverse_iterator i= list_store[0].rbegin();i!=list_store[0].rend();++i){
+					cout<< *i <<endl;
+				}
 				break;
 			default:
 				//printf("inp : %d\n",inp);

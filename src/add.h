@@ -7,6 +7,21 @@
 
 #include "declaration.h"
 
+list<string> insert_by_token_into_list(list<string> undo_list,string total){
+    // char * strtok ( char * str, const char * delimiters );
+    char buffer[1024];
+    const char * Into_buffer = (char*)malloc(sizeof(char)*1024);
+    Into_buffer = total.c_str();
+    strcpy(buffer, Into_buffer);
+    char *token = strtok(buffer, " ");
+    while (token) {
+        string token_temp(token);
+        undo_list.push_front(token_temp);
+        token = strtok(NULL, " ");
+    }
+    return undo_list;
+}
+
 vector<list <string> > add(char file_name[]){
     vector <vector <string> > vec;
     std::vector <list<string> > list_store;
@@ -15,7 +30,7 @@ vector<list <string> > add(char file_name[]){
     char *add_input;
     char *per = (char*)malloc(sizeof(char) * MAX_NAME);
     strcat(per,"a+");
-    printf("enter contents of file\n");
+    //printf("enter contents of file\n");
     add_input = (char*)malloc(sizeof(char)*MAX_STRING+2);
     //enter contents till the escape sequence is entered. ascii == 27;
     fgets(add_input,MAX_STRING,stdin);
@@ -41,8 +56,9 @@ vector<list <string> > add(char file_name[]){
         * think of more efficient way.
 
         */
+        undo_list = insert_by_token_into_list(undo_list,total);
         // char * strtok ( char * str, const char * delimiters );
-        char buffer[1024];
+        /*char buffer[1024];
         const char * Into_buffer = (char*)malloc(sizeof(char)*1024);
         Into_buffer = total.c_str();
         strcpy(buffer, Into_buffer);
@@ -52,7 +68,7 @@ vector<list <string> > add(char file_name[]){
             undo_list.push_front(token_temp);
             token = strtok(NULL, " ");
         }
-
+        */
         fflush(stdout);
         fflush(stdin);
     }
