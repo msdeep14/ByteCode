@@ -30,7 +30,7 @@ int main(int argc, char *argv[]){
 	printf("\n\t\tHello world!!!\n\n");
 	char ch_check = 'y';
 	int flag=1,ret=0;
-	list<string> ret_list;
+	vector <list <string> > list_store;
 	FILE *fp;
 	char *file_name;
 	file_name=(char*)malloc(sizeof(char)*MAX_NAME);
@@ -50,7 +50,6 @@ int main(int argc, char *argv[]){
 			}
 			fp = open_file(argv[2],per);
 			strcpy(file_name,argv[2]);
-			//fclose(fp);
 		}else if(strcmp(argv[1],"-r") == 0){
 			//open file in read mode;
 			char *per = (char*)malloc(sizeof(char)*MAX_NAME);
@@ -102,19 +101,20 @@ int main(int argc, char *argv[]){
 		switch(inp){
 			case 1 :
 				//add
-				ret_list = add(file_name);//
-				if(ret_list.size() == 0){
+				list_store = add(file_name);//
+				if(list_store[1].size() == 0){
 					printf("\nwrite operation failed!!!\n");
 				}
-				for (list<string>::reverse_iterator i = ret_list.rbegin(); i != ret_list.rend(); ++i){
+				/*
+				for (list<string>::reverse_iterator i = list_store[1].rbegin(); i != list_store[1].rend(); ++i){
 			        cout << *i << endl;
-			    }
+			    }*/
 				break;
 			case 2 :
 				// save and exit
 				//do all the operations on returned list and finally write list to file on termination;
 				//write_list_to_file(file_name,per,lis);
-				for (list<string>::reverse_iterator i = ret_list.rbegin(); i != ret_list.rend(); ++i){
+				for (list<string>::reverse_iterator i = list_store[0].rbegin(); i != list_store[0].rend(); ++i){
 			        std::string str = *i;
 			        const char *cstr = str.c_str();
 			        fprintf(fp,"%s",cstr);
@@ -134,7 +134,7 @@ int main(int argc, char *argv[]){
 					flag = 0;
 				}else if(ch_check == 'n' || ch_check == 'N'){
 					printf("\nsaving the contents of file!\n");
-					for (list<string>::reverse_iterator i = ret_list.rbegin(); i != ret_list.rend(); ++i){
+					for (list<string>::reverse_iterator i = list_store[0].rbegin(); i != list_store[0].rend(); ++i){
 				        std::string str = *i;
 				        const char *cstr = str.c_str();
 				        fprintf(fp,"%s",cstr);
@@ -150,12 +150,37 @@ int main(int argc, char *argv[]){
 				break;
 			case 4:
 				//undo
-				if(ret_list.size() > 0){
-					ret_list.pop_front();
+				if(list_store[1].size() > 0){
+					string front_element = list_store[1].front();
+					list_store[1].pop_front();
+					//also remove this string element from ret_list;
+					if(list_store[0].size() != 0){
+						int size = list_store[0].size();
+						//string s_ret_list = list_store[0].front();
+						int size_undo_list_element = front_element.size();
+						if(size_undo_list_element >0){
+							int size_list_store = list_store[0].front().size();
+							int size_diff = size_list_store - size_undo_list_element;
+							string to_change = list_store[0].front();
+							cout<<"to_change,size :: "<<to_change<<", "<<size_list_store<<endl;
+							//to_change[size_diff]="\0";
+							//to_change.insert(size_diff-1,"\0");
+							if(size_diff - 1 > 1){
+								to_change.resize(size_diff-1);
+								list_store[0].front() = to_change;
+								//cout<<"changed:: "<<list_store[0].front()<<endl;
+							}else{
+								list_store[0].pop_front();
+							}
+						}else{
+							list_store[0].pop_front();
+						}
+					}
 					system("clear");
-					for (list<string>::reverse_iterator i = ret_list.rbegin(); i != ret_list.rend(); ++i){
+					/*
+					for (list<string>::reverse_iterator i = list_store[1].rbegin(); i != list_store[1].rend(); ++i){
 				        cout << *i << endl;
-				    }
+				    }*/
 				}else{
 					printf("\nnothing to undo!\n");
 				}

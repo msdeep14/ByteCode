@@ -7,10 +7,11 @@
 
 #include "declaration.h"
 
-list<string> add(char file_name[]){
-    //store input in stack first and finally write to file and the time of termination;
-    //stack<string> stack_inp;
-    list <string> lis;
+vector<list <string> > add(char file_name[]){
+    vector <vector <string> > vec;
+    std::vector <list<string> > list_store;
+    list <string> ret_list;
+    list <string> undo_list;
     char *add_input;
     char *per = (char*)malloc(sizeof(char) * MAX_NAME);
     strcat(per,"a+");
@@ -29,7 +30,7 @@ list<string> add(char file_name[]){
         std::string str(add_input);
         string str_temp(str.begin(),str.end()-1);
         total +=str_temp;
-        lis.push_front(total);
+        ret_list.push_front(total);
 
         /*
         * list element contains complete line as its element
@@ -40,6 +41,17 @@ list<string> add(char file_name[]){
         * think of more efficient way.
 
         */
+        // char * strtok ( char * str, const char * delimiters );
+        char buffer[1024];
+        const char * Into_buffer = (char*)malloc(sizeof(char)*1024);
+        Into_buffer = total.c_str();
+        strcpy(buffer, Into_buffer);
+        char *token = strtok(buffer, " ");
+        while (token) {
+            string token_temp(token);
+            undo_list.push_front(token_temp);
+            token = strtok(NULL, " ");
+        }
 
         fflush(stdout);
         fflush(stdin);
@@ -48,7 +60,7 @@ list<string> add(char file_name[]){
     //write list into file
     FILE *fp = open_file(file_name,per);
     printf("\nvalues\n");
-    for (list<string>::reverse_iterator i = lis.rbegin(); i != lis.rend(); ++i){
+    for (list<string>::reverse_iterator i = ret_list.rbegin(); i != ret_list.rend(); ++i){
         //cout << *i << endl;
         std::string str = *i;
         const char *cstr = str.c_str();
@@ -59,5 +71,7 @@ list<string> add(char file_name[]){
         fprintf(fp,"%s",cstr);
     }
     */
-    return lis;
+    list_store.push_back(ret_list);
+    list_store.push_back(undo_list);
+    return list_store;
 }
