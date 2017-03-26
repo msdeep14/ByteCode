@@ -57,36 +57,9 @@ vector<list <string> > add(char file_name[]){
 
         */
         undo_list = insert_by_token_into_list(undo_list,total);
-        // char * strtok ( char * str, const char * delimiters );
-        /*char buffer[1024];
-        const char * Into_buffer = (char*)malloc(sizeof(char)*1024);
-        Into_buffer = total.c_str();
-        strcpy(buffer, Into_buffer);
-        char *token = strtok(buffer, " ");
-        while (token) {
-            string token_temp(token);
-            undo_list.push_front(token_temp);
-            token = strtok(NULL, " ");
-        }
-        */
         fflush(stdout);
         fflush(stdin);
     }
-    /*
-    //write list into file
-    FILE *fp = open_file(file_name,per);
-    printf("\nvalues\n");
-    for (list<string>::reverse_iterator i = ret_list.rbegin(); i != ret_list.rend(); ++i){
-        //cout << *i << endl;
-        std::string str = *i;
-        const char *cstr = str.c_str();
-        fprintf(fp,"%s",cstr);
-        str.clear();
-        str = "\n";
-        cstr = str.c_str();
-        fprintf(fp,"%s",cstr);
-    }
-    */
     list_store.push_back(ret_list);
     list_store.push_back(undo_list);
     return list_store;
