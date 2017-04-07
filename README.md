@@ -5,12 +5,13 @@
 ### How to execute
 
  1. Fork the project.
- 2. go the src folder of project.
- 3. compile main.cpp using g++ main.cpp
- 4. To run the executable a.out
-
-1. type ./a.out -c filename for creating new file.
-2. type ./a.out filename to modify existing file.
+ 2. Type **make** and execute.
+ 3. It generate all the executables.
+ 4. Type **make clean** for recompiling.
+ 5. To run the executable ./bytecode
+ 
+1. type ./bytecode -c filename for creating new file.
+2. type ./bytecode filename to modify existing file.
 
 ### Editor options
 
