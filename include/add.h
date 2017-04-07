@@ -22,7 +22,7 @@ list<string> insert_by_token_into_list(list<string> undo_list,string total){
     return undo_list;
 }
 
-vector<list <string> > add(char file_name[]){
+vector<list <string> > add(){
     vector <vector <string> > vec;
     std::vector <list<string> > list_store;
     list <string> ret_list;

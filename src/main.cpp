@@ -57,7 +57,7 @@ int main(int argc, char *argv[]){
 			//check if entered file name already exists
 			char *per = (char*)malloc(sizeof(char) * MAX_NAME);
 			strcat(per,"w+");
-			ret = check_file_existence(argv[2],per);
+			ret = check_file_existence(argv[2]);
 			if(ret == 1){
 				printf("\n%s already exists!!!\n",argv[2]);
 				printf("for opening existing file enter : ./a.out myfile.txt\n\n");
@@ -71,7 +71,7 @@ int main(int argc, char *argv[]){
 			strcat(per,"r");
 			fp = open_file(argv[2],per);
 			if(fp != NULL){
-				print_file_contents(fp,per);
+				print_file_contents(fp);
 				return 0;
 			}else{
 				printf("\nfile don't exist!\n\t\texiting...\n\n");
@@ -89,7 +89,7 @@ int main(int argc, char *argv[]){
 		fp = open_file(argv[1],per);
 		strcpy(file_name,argv[1]);
 		//print contents of file on terminal
-		print_file_contents(fp,per);
+		print_file_contents(fp);
 		if(fp == NULL){
 			printf("\n%s don't exist\n\n",argv[1]);
 			exit(0);
@@ -117,7 +117,7 @@ int main(int argc, char *argv[]){
 		switch(inp){
 			case 1 :
 				//add
-				list_store = add(file_name);//
+				list_store = add();//
 				if(list_store[1].size() == 0){
 					printf("\nwrite operation failed!!!\n");
 				}else{
@@ -179,7 +179,7 @@ int main(int argc, char *argv[]){
 					list_store[1].pop_front();
 					//also remove this string element from ret_list;
 					if(list_store[0].size() != 0){
-						int size = list_store[0].size();
+						//int size = list_store[0].size();
 						//string s_ret_list = list_store[0].front();
 						int size_undo_list_element = front_element.size();
 						if(size_undo_list_element >0){

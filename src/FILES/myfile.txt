@@ -1,3 +1,0 @@
-ByteCode editor developed by
-mandeep singh shekhawat
-in C language.

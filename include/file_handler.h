@@ -8,7 +8,7 @@
 
 #include "declaration.h"
 
-void print_file_contents(FILE *fp,char per[]){
+void print_file_contents(FILE *fp){
     int c;
     while ((c = getc(fp)) != EOF){
         putchar(c);
@@ -17,7 +17,7 @@ void print_file_contents(FILE *fp,char per[]){
 
 FILE * open_file(char file_name[] , char perm[]){
     FILE *fp;
-    struct stat st = {0};
+    struct stat st = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
     char *name = (char *)malloc(sizeof(char) * (2 * MAX_NAME + 15));
        strcpy(name, "./FILES/");
 
@@ -34,8 +34,8 @@ FILE * open_file(char file_name[] , char perm[]){
 }
 
 void delete_file(char file_name[]){
-    FILE *fp;
-    struct stat st = {0};
+    //FILE *fp;
+    //struct stat st = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
     char *name = (char *)malloc(sizeof(char) * (2 * MAX_NAME + 15));
     strcpy(name,"rm -rf ");
     strcat(name, "./FILES/");
@@ -44,7 +44,7 @@ void delete_file(char file_name[]){
     free(name);
 }
 
-int check_file_existence(char file_name[],char perm[]){
+int check_file_existence(char file_name[]){
     /*
     FILE *fp;
     struct stat st = {0};
