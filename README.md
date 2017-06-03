@@ -10,8 +10,10 @@
  4. Type **make clean** for recompiling.
  5. To run the executable ./bytecode
  
-1. type ./bytecode -c filename for creating new file.
-2. type ./bytecode filename to modify existing file.
+Follow the steps 
+ 1. type **./bytecode -c filename** for creating new file.
+ 
+ 2. type **./bytecode filename** to modify existing file.
 
 ### Editor options
 
