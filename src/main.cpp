@@ -50,7 +50,7 @@ int main(int argc, char *argv[]){
 	store_input_vec.push_back("yp");
 	file_name=(char*)malloc(sizeof(char)*MAX_NAME);
 	//check for the no. of arguments
-	// for creating new file -> ./a.out -c myfile.txt
+	// for creating new file -> ./bytecode -c myfile.txt
 	if(argc == 3){
 		if(strcmp(argv[1],"-c") == 0){
 			//create new file
@@ -60,7 +60,7 @@ int main(int argc, char *argv[]){
 			ret = check_file_existence(argv[2]);
 			if(ret == 1){
 				printf("\n%s already exists!!!\n",argv[2]);
-				printf("for opening existing file enter : ./a.out myfile.txt\n\n");
+				printf("for opening existing file enter : ./bytecode myfile.txt\n\n");
 				exit(0);
 			}
 			fp = open_file(argv[2],per);
@@ -78,7 +78,7 @@ int main(int argc, char *argv[]){
 				return 0;
 			}
 		}else{
-			printf("\nwrong input, usage : ./a.out -c myfile.txt\n\n");
+			printf("\nwrong input, usage : ./bytecode -c myfile.txt\n\n");
 			exit(0);
 		}
 	}
@@ -96,7 +96,7 @@ int main(int argc, char *argv[]){
 		}
 		//fclose(fp);
 	}else{
-		printf("\nwrong input, usage : ./a.out -c myfile.txt\n OR SEE INSTRUCIONS\n");
+		printf("\nwrong input, usage : ./bytecode -c myfile.txt\n OR SEE INSTRUCIONS\n");
 		exit(0);
 	}
 
