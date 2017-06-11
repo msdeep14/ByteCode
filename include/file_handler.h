@@ -25,9 +25,13 @@ FILE * open_file(char file_name[] , char perm[]){
         mkdir(name, 0775);
 
     strcat(name, file_name);
+    // cout<<"name:: "<<name<<endl;
+    // cout<<"perm:: "<<perm<<endl;
     fp = fopen(name, perm);
+    // cout<<"fp: "<<fp<<endl;
     if (!fp){
         printf("\nError in opening file\n");
+        exit(0);
     }
     free(name);
     return fp;

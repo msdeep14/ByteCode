@@ -29,7 +29,7 @@ vector<list <string> > add(){
     list <string> undo_list;
     char *add_input;
     char *per = (char*)malloc(sizeof(char) * MAX_NAME);
-    strcat(per,"a+");
+    strcpy(per,"a+");
     //printf("enter contents of file\n");
     add_input = (char*)malloc(sizeof(char)*MAX_STRING+2);
     //enter contents till the escape sequence is entered. ascii == 27;

@@ -56,7 +56,7 @@ int main(int argc, char *argv[]){
 			//create new file
 			//check if entered file name already exists
 			char *per = (char*)malloc(sizeof(char) * MAX_NAME);
-			strcat(per,"w+");
+			strcpy(per,"w+");
 			ret = check_file_existence(argv[2]);
 			if(ret == 1){
 				printf("\n%s already exists!!!\n",argv[2]);
@@ -68,7 +68,7 @@ int main(int argc, char *argv[]){
 		}else if(strcmp(argv[1],"-r") == 0){
 			//open file in read mode;
 			char *per = (char*)malloc(sizeof(char)*MAX_NAME);
-			strcat(per,"r");
+			strcpy(per,"r");
 			fp = open_file(argv[2],per);
 			if(fp != NULL){
 				print_file_contents(fp);
@@ -85,7 +85,7 @@ int main(int argc, char *argv[]){
 	//open a existing file
 	else if(argc == 2){
 		char *per = (char*)malloc(sizeof(char) * MAX_NAME);
-		strcat(per,"a+");
+		strcpy(per,"a+");
 		fp = open_file(argv[1],per);
 		strcpy(file_name,argv[1]);
 		//print contents of file on terminal
