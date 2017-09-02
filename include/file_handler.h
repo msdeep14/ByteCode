@@ -8,6 +8,16 @@
 
 #include "declaration.h"
 
+void deleteFile(char file_name[]){
+    char *name = (char*)malloc(sizeof(char) * (2*MAX_NAME + 15));
+    strcpy(name, "rm -rf ");
+    strcat(name, "./FILES/");
+    strcat(name, file_name);
+    system(name);
+    free(name);
+    printf("%s deleted successfully\n",file_name);
+}
+
 void print_file_contents(FILE *fp){
     int c;
     while ((c = getc(fp)) != EOF){

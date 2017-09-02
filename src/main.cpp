@@ -81,6 +81,19 @@ int main(int argc, char *argv[]){
 				printf("\nfile don't exist!\n\t\texiting...\n\n");
 				return 0;
 			}
+		}else if(strcmp(argv[1],"-d") == 0){
+			// delete file
+			// check if file exists
+			char *per = (char*)malloc(sizeof(char)*MAX_NAME);
+			strcpy(per,"r");
+			fp = open_file(argv[2],per);
+			if(fp != NULL){
+				deleteFile(argv[2]);
+				return 0;
+			}else{
+				printf("\nfile don't exist!\n\t\texiting...\n\n");
+				return 0;
+			}
 		}else{
 			printf("\nwrong input, usage : ./bytecode -c myfile.txt\n\n");
 			exit(0);
@@ -111,6 +124,8 @@ int main(int argc, char *argv[]){
 	// u -> undo
 	// yc -> copies current line
 	// yp -> paste copied line
+	// help -> show help instructions
+	// d -> delete a file
 
 	char *input = (char*)malloc(sizeof(char)*MAX_NAME);
 	printf("\n:");
