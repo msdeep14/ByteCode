@@ -9,6 +9,7 @@
 #include "declaration.h"
 #include "file_handler.h"
 #include "add.h"
+#include "utility.h"
 
 int convert_to_integer(std::vector<string> store_input_vec, char input[]){
 	int ans = 0;
@@ -19,6 +20,7 @@ int convert_to_integer(std::vector<string> store_input_vec, char input[]){
 	else if(s == store_input_vec[3]) ans = 4;
 	else if(s == store_input_vec[4]) ans = 5;
 	else if(s == store_input_vec[5]) ans = 6;
+	else if(s == store_input_vec[6]) ans = 7;
 	else ans = 0;
 	return ans;
 }
@@ -27,6 +29,7 @@ void print_message(){
 	printf("\n\t\t\t\t\t\t\tByteCode\n");
 	printf("\t\t\t\t\t\t\t=========\n\n");
 	printf("\n\t\t\t\t\t\t developed by : msdeep14\n\n");
+	printf("\nType \"help\" for How to use ByteCode\n\n");
 }
 
 int main(int argc, char *argv[]){
@@ -48,6 +51,7 @@ int main(int argc, char *argv[]){
 	store_input_vec.push_back("u");
 	store_input_vec.push_back("yc");
 	store_input_vec.push_back("yp");
+	store_input_vec.push_back("help");
 	file_name=(char*)malloc(sizeof(char)*MAX_NAME);
 	//check for the no. of arguments
 	// for creating new file -> ./bytecode -c myfile.txt
@@ -96,7 +100,7 @@ int main(int argc, char *argv[]){
 		}
 		//fclose(fp);
 	}else{
-		printf("\nwrong input, usage : ./bytecode -c myfile.txt\n OR SEE INSTRUCIONS\n");
+		printf("\nwrong input, usage : ./bytecode -c myfile.txt\n OR type \"help\" for instructions\n");
 		exit(0);
 	}
 
@@ -229,6 +233,10 @@ int main(int argc, char *argv[]){
 				for(list<string> :: reverse_iterator i= list_store[0].rbegin();i!=list_store[0].rend();++i){
 					cout<< *i <<endl;
 				}
+				break;
+			case 7:
+				//help
+				printHelpInstructions();
 				break;
 			default:
 				//printf("inp : %d\n",inp);
