@@ -44,7 +44,7 @@ vector<list <string> > add(){
         //str_temp because str takes "\n" as the last element of string which creates a empty push in the list;
         std::string str(add_input);
         string str_temp(str.begin(),str.end()-1);
-        total +=str_temp;
+        total += str_temp;
         ret_list.push_front(total);
 
         /*
